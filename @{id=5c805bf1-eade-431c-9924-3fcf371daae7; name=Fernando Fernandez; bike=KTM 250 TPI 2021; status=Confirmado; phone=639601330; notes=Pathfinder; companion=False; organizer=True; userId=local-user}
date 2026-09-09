@@ -1,0 +1,451 @@
+{
+  "version": 1,
+  "profile": {
+    "name": "Fernando Fernandez",
+    "email": "ffernandez333@gmail.com",
+    "role": "Organizador / Admin",
+    "userId": "local-user",
+    "phone": "",
+    "bike": "KTM 250 TPI 2021",
+    "notes": "Pathfinder"
+  },
+  "trips": [
+    {
+      "id": "6a99cd0bfaca65d20312a73a",
+      "name": "Bostronizo",
+      "zone": "Cantabria",
+      "start": "2026-10-09",
+      "end": "2026-10-12",
+      "status": "Confirmada",
+      "description": "3 dias de ruta enduro en Bostronizo. Habra barbacoa el mejor dia que caiga. Cada uno que se lleve su desayuno, comida, cena y bebidas. Alli no hay nada y el pueblo mas cercano esta a 15min en coche. Tampoco hay gasalinera ni lavar motos. Gaslinera por las rutas aunque si os llevais garrafa mejor. En las dos casas hay para cocinar de todo y las camas hay sabanas. Llevar toalla. Comeremos de bocata y luego cena para recuperar. Hay alternativas en todas las rutas.",
+      "notes": "",
+      "participants": [
+        {
+          "id": "pablo-2r2d",
+          "name": "Pablo 2r2d",
+          "bike": "Exc 300 tpi",
+          "status": "Confirmado",
+          "phone": "696432769",
+          "notes": "",
+          "companion": false,
+          "organizer": false,
+          "userId": ""
+        },
+        {
+          "id": "0bc74e8d-b86e-416f-b721-ce3220bb60b3",
+          "name": "Kiko",
+          "bike": "Ktm 300",
+          "status": "Confirmado",
+          "phone": "616496485",
+          "notes": "",
+          "companion": false,
+          "organizer": false,
+          "userId": ""
+        },
+        {
+          "id": "88ba484e-4c0d-42c3-91a1-fef281237e2d",
+          "name": "Luixfco",
+          "bike": "Gasgas",
+          "status": "Pendiente",
+          "phone": "",
+          "notes": "Ninguna",
+          "companion": false,
+          "organizer": false,
+          "userId": ""
+        },
+        {
+          "id": "708dd70f-1edc-4d7c-ba1f-956dacf3d236",
+          "name": "Juan Carlos Nieto",
+          "bike": "KTM EXC 300",
+          "status": "Confirmado",
+          "phone": "",
+          "notes": "",
+          "companion": false,
+          "organizer": false,
+          "userId": ""
+        },
+        {
+          "id": "d4f96d11-147c-479d-b921-7c4d714b9867",
+          "name": "Javi_Jarvis",
+          "bike": "Husqvarna TE300i",
+          "status": "Confirmado",
+          "phone": "626574349",
+          "notes": "Alérgico al ácido acetil salicílico y a las sufamidas. Llevo casi otra moto de repuesto por si acaso.",
+          "companion": false,
+          "organizer": false,
+          "userId": ""
+        },
+        {
+          "id": "8fdfdcc2-2a53-4acc-963f-fa844417f40b",
+          "name": "Jesús Garcia Martin",
+          "bike": "Yamaha wrf",
+          "status": "Confirmado",
+          "phone": "660620681",
+          "notes": "",
+          "companion": false,
+          "organizer": false,
+          "userId": ""
+        },
+        {
+          "id": "5c805bf1-eade-431c-9924-3fcf371daae7",
+          "name": "Fernando Fernandez",
+          "bike": "KTM 250 TPI 2021",
+          "status": "Confirmado",
+          "phone": "639601330",
+          "notes": "Pathfinder",
+          "companion": false,
+          "organizer": true,
+          "userId": "local-user"
+        }
+      ],
+      "lodgings": [
+        {
+          "id": "casa",
+          "name": "Casa Rural Los Maestros",
+          "address": "",
+          "url": "",
+          "contact": "",
+          "checkin": "",
+          "checkout": "",
+          "total": "",
+          "perPerson": 22,
+          "notes": "",
+          "confirmed": true
+        }
+      ],
+      "expenses": [
+        {
+          "id": "alojamiento",
+          "type": "Alojamiento",
+          "description": "Casa Los Maestros (22€/persona/día)",
+          "amount": 22,
+          "confirmed": false
+        }
+      ],
+      "routes": [
+        {
+          "id": "sabado",
+          "name": "Sabado",
+          "distance": 70,
+          "difficulty": "Media",
+          "elevation": "",
+          "duration": "",
+          "fuel": 0,
+          "notes": "Sábado haremos primero bucle Toranzo. El bucle Silio para el domingo. Si hay ganas sorpresita final.",
+          "file": "/assets/sabado.gpx",
+          "filename": "Sabado_2_70km.gpx"
+        },
+        {
+          "id": "domingo",
+          "name": "Domingo",
+          "distance": 58,
+          "difficulty": "Media",
+          "notes": "Domingo",
+          "file": "/assets/domingo.gpx",
+          "filename": "Domingo_58km.gpx"
+        },
+        {
+          "id": "lunes",
+          "name": "Lunes",
+          "distance": 37,
+          "difficulty": "Media",
+          "notes": "",
+          "file": "/assets/lunes.gpx",
+          "filename": "Lunes_37km.gpx"
+        }
+      ],
+      "organizerId": "local-user"
+    },
+    {
+      "id": "6a99c6f46ef0815af879555b",
+      "name": "Guadarrama - Prueba",
+      "zone": "Cercedilla",
+      "start": "2026-09-20",
+      "end": "",
+      "status": "Abierta",
+      "description": "Ruta circular de un día por la Sierra de Guadarrama. Apto para todos los niveles con tramos opcionales.",
+      "notes": "Quedamos a las 8:00 en el aparcamiento de Las Dehesas. Desayuno antes de salir.",
+      "participants": [
+        {
+          "name": "usuario_prueba",
+          "phone": "",
+          "bike": "",
+          "notes": "",
+          "status": "Pendiente",
+          "id": "e795b051-1d06-4dc1-9b0a-031f7d6b1e27",
+          "companion": false,
+          "organizer": true,
+          "userId": ""
+        }
+      ],
+      "lodgings": [],
+      "expenses": [
+        {
+          "id": "gasolina",
+          "type": "Combustible",
+          "description": "Gasolina",
+          "amount": 30,
+          "confirmed": false
+        },
+        {
+          "id": "comida",
+          "type": "Comidas",
+          "description": "Comida ruta",
+          "amount": 20,
+          "confirmed": false
+        }
+      ],
+      "routes": [
+        {
+          "id": "dehesas",
+          "name": "Circular Las Dehesas",
+          "distance": 35,
+          "duration": "4h",
+          "elevation": 700,
+          "fuel": 1,
+          "difficulty": "Media",
+          "notes": "Ruta circular con vistas a la bola del mundo.",
+          "mapCenter": [
+            40.759,
+            -4.056
+          ]
+        }
+      ],
+      "organizerId": "e795b051-1d06-4dc1-9b0a-031f7d6b1e27"
+    },
+    {
+      "id": "6a9eaa32c0dc1b92cac8a085",
+      "name": "Salida Prueba",
+      "zone": "Guadalajara",
+      "start": "2026-09-18",
+      "end": "",
+      "status": "Completada",
+      "description": "Prueba de salida",
+      "notes": "",
+      "participants": [
+        {
+          "id": "9cf40aff-89e8-4572-b9a4-1ee4923673be",
+          "name": "Jose",
+          "bike": "Rockrider 6.3",
+          "status": "Pendiente",
+          "phone": "",
+          "notes": "",
+          "companion": true,
+          "organizer": false,
+          "userId": ""
+        },
+        {
+          "id": "4ba936ff-e529-4766-acef-ccb9290fe022",
+          "name": "Jesus",
+          "bike": "Yami",
+          "status": "Confirmado",
+          "phone": "",
+          "notes": "",
+          "companion": false,
+          "organizer": false,
+          "userId": ""
+        },
+        {
+          "id": "bcccedca-ec77-4559-abcf-8f8a6861ceba",
+          "name": "Fernando Fernandez",
+          "bike": "KTM 250 TPI 2021",
+          "status": "Confirmado",
+          "phone": "",
+          "notes": "",
+          "companion": false,
+          "organizer": true,
+          "userId": "local-user"
+        }
+      ],
+      "lodgings": [],
+      "expenses": [],
+      "routes": [],
+      "organizerId": "local-user"
+    },
+    {
+      "id": "6a99c6f46ef0815af879555a",
+      "name": "Pirineos Aragoneses - Octubre",
+      "zone": "Valle de Tena",
+      "start": "2026-10-24",
+      "end": "2026-10-28",
+      "status": "Cancelada",
+      "description": "Salida de 4 días por los valles del Pirineo aragonés. Rutas de montaña con tramos técnicos y paisajes espectaculares. Nivel medio-alto.",
+      "notes": "Reunión viernes 19h en el alojamiento. Llevar cadenas y neumáticos de tacos. Gasolina: llenar en Sallent de Gállego.",
+      "participants": [
+        {
+          "id": "b66847b5-6276-455b-9e20-05a27d3c603a",
+          "name": "Carlos M.",
+          "bike": "Husqvarna FE 350",
+          "status": "Confirmado",
+          "phone": "",
+          "notes": "",
+          "companion": true,
+          "organizer": false,
+          "userId": ""
+        },
+        {
+          "id": "29618cf0-9b11-44a4-b6ff-fe3c77880a14",
+          "name": "Organizador",
+          "bike": "KTM 300 EXC",
+          "status": "Confirmado",
+          "phone": "",
+          "notes": "",
+          "companion": false,
+          "organizer": true,
+          "userId": ""
+        },
+        {
+          "id": "88551d59-bcf2-4b0a-9643-08db46b2b859",
+          "name": "Marta S.",
+          "bike": "",
+          "status": "No participa",
+          "phone": "",
+          "notes": "",
+          "companion": false,
+          "organizer": false,
+          "userId": ""
+        },
+        {
+          "id": "8a4fe415-e27a-48f4-a2ac-58d34560369e",
+          "name": "Javier R.",
+          "bike": "Beta 430 RR",
+          "status": "Pendiente",
+          "phone": "",
+          "notes": "",
+          "companion": false,
+          "organizer": false,
+          "userId": ""
+        },
+        {
+          "id": "51e265ee-663f-4910-b99a-0a22437d49c4",
+          "name": "Laura G.",
+          "bike": "Yamaha WR 250",
+          "status": "Confirmado",
+          "phone": "",
+          "notes": "",
+          "companion": false,
+          "organizer": false,
+          "userId": ""
+        }
+      ],
+      "lodgings": [
+        {
+          "id": "pinos",
+          "name": "Casa rural Los Pinos",
+          "address": "Calle Mayor 5, Sallent de Gállego",
+          "total": 720,
+          "perPerson": 120,
+          "confirmed": true
+        }
+      ],
+      "expenses": [
+        {
+          "id": "comidas-pirineos",
+          "type": "Comidas",
+          "description": "Comidas y cenas",
+          "amount": 100,
+          "confirmed": true
+        },
+        {
+          "id": "gasolina-pirineos",
+          "type": "Combustible",
+          "description": "Gasolina ida y vuelta",
+          "amount": 80,
+          "confirmed": false
+        },
+        {
+          "id": "peajes",
+          "type": "Peajes",
+          "description": "Peajes autopista",
+          "amount": 25,
+          "confirmed": true
+        }
+      ],
+      "routes": [
+        {
+          "id": "piedrafita",
+          "name": "Vuelta al Ibón de Piedrafita",
+          "distance": 65,
+          "duration": "6h",
+          "elevation": 1800,
+          "fuel": 2,
+          "difficulty": "Difícil",
+          "notes": "Tramo técnico final con rocas. Llevar protectores.",
+          "mapCenter": [
+            42.699,
+            -0.323
+          ]
+        },
+        {
+          "id": "sendero",
+          "name": "Sendero del Valle",
+          "distance": 40,
+          "duration": "4h",
+          "elevation": 900,
+          "fuel": 1,
+          "difficulty": "Media",
+          "notes": "Ruta de calentamiento."
+        }
+      ],
+      "organizerId": "29618cf0-9b11-44a4-b6ff-fe3c77880a14"
+    },
+    {
+      "id": "sierra-morena",
+      "name": "Sierra Morena - Primavera",
+      "zone": "Despeñaperros",
+      "start": "2026-05-15",
+      "end": "2026-05-17",
+      "status": "Completada",
+      "description": "Ruta de primavera por Sierra Morena. Tramos rápidos y senderos técnicos.",
+      "notes": "Salida completada con éxito.",
+      "participants": [
+        {
+          "id": "7f993681-9861-4ee0-a994-5e0aabb41437",
+          "name": "Organizador",
+          "bike": "",
+          "status": "Confirmado",
+          "phone": "",
+          "notes": "",
+          "companion": false,
+          "organizer": true,
+          "userId": ""
+        },
+        {
+          "id": "36e08cfb-09d6-494f-94bb-7ab12b9b2638",
+          "name": "Laura G.",
+          "bike": "",
+          "status": "Confirmado",
+          "phone": "",
+          "notes": "",
+          "companion": false,
+          "organizer": false,
+          "userId": ""
+        },
+        {
+          "id": "cf59072a-b7a4-469c-9161-712c7d1360b2",
+          "name": "Carlos M.",
+          "bike": "",
+          "status": "Confirmado",
+          "phone": "",
+          "notes": "",
+          "companion": false,
+          "organizer": false,
+          "userId": ""
+        }
+      ],
+      "lodgings": [
+        {
+          "id": "refugio",
+          "name": "Refugio Santa Elena",
+          "address": "Despeñaperros",
+          "total": 360,
+          "perPerson": 90,
+          "confirmed": true
+        }
+      ],
+      "expenses": [],
+      "routes": [],
+      "organizerId": "7f993681-9861-4ee0-a994-5e0aabb41437"
+    }
+  ]
+}

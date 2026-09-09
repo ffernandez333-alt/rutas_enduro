@@ -1,0 +1,11 @@
+import {readFile,writeFile} from 'node:fs/promises';
+let css=await readFile('styles.css','utf8');
+css+='\n/* Ajustes medidos contra la interfaz original. */\n.brand p{margin-bottom:0}.brand .grow{flex:1 1 0}.round{flex-shrink:0}.trip-card .zone{margin-top:2px}.past{opacity:1}.past .trip-card{opacity:.65}.past .eyebrow{opacity:1}.detail-person .icon-btn svg{width:14px;height:14px}.route-card .name,.expense-card .name,.lodging-card .name{font-size:16px;font-weight:600}.route-meta{margin-top:4px;flex-wrap:wrap}.route-body>p{font-style:italic}.map{height:256px;border:1px solid var(--line);border-radius:12px}.difficulty{border-radius:999px;padding:2px 8px;font-size:11px;font-weight:600;line-height:16.5px;background:#eab30826;color:#fde047;border:1px solid #eab3084d}.difficulty.dificil{color:#fdba74;background:#f9731633;border-color:#f9731666}.route-grip{color:var(--muted);cursor:grab;padding:0 4px 0 0}.route-top{align-items:flex-start}.route-top .icon-btn{padding:2px}.route-top .icon-btn svg{width:14px;height:14px}.route-card{margin-bottom:12px}\n';
+await writeFile('styles.css',css);
+let source=await readFile('src/seed.js','utf8');source=source.replace("id:'guadarrama'","id:'6a99c6f46ef0815af879555b'").replace("id:'pirineos'","id:'6a99c6f46ef0815af879555a'");
+await writeFile('src/seed.js',source);
+let app=await readFile('src/app.js','utf8');
+const notes='${t.notes?`<section class="section"><h2 style="margin-bottom:8px">Notas importantes</h2><p class="description">${escape(t.notes)}</p></section>`:\'\'}';
+app=app.replace(notes,'').replace("+'</button>')}</main>`;}","+'</button>')}"+notes+"</main>`;}");
+app=app.replace("if(type==='files'){const routes=activeTrip.routes.filter(r=>r.file);showModal", "if(type==='files'){const routes=activeTrip.routes.filter(r=>r.file);if(!routes.length){toast('No hay archivos para descargar');return;}showModal");
+await writeFile('src/app.js',app);

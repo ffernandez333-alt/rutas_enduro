@@ -1,0 +1,12 @@
+/* El editor siempre queda por encima de cualquier mapa Leaflet. */
+.overlay{z-index:1000;isolation:isolate}.overlay .dialog{position:relative;z-index:1001}.leaflet-container{z-index:0!important}.detail-main{position:relative;z-index:1}.profile-edit{position:relative;z-index:1}
+
+/* Ajuste de la cabecera de la salida: datos algo más arriba e iconos al extremo derecho. */
+.detail-toolbar{margin-bottom:8px}
+.detail-actions{margin-left:auto}
+
+/* Las salidas del calendario y los nombres de ruta mantienen el texto alineado a la izquierda. */
+.compact-card .grow,.compact-card p,.route-card .name{text-align:left}
+.bottom-nav.has-admin button{width:20%}
+.admin-users-dialog>.close{width:44px;height:44px;padding:8px;font-size:24px;right:10px;top:10px}
+.download-progress{display:inline-flex;align-items:center;gap:4px;width:92px;height:8px;border:1px solid var(--line);border-radius:999px;overflow:visible;vertical-align:middle}.download-progress>span{display:block;width:0;height:100%;border-radius:999px;background:var(--orange);transition:width .12s linear}.download-progress>b{display:none;color:#34d399;font-size:12px;line-height:1}.download-progress.done>b{display:inline}.download-progress.done>span{width:100%!important;background:#34d399}
