@@ -1,5 +1,6 @@
 import {icon} from './icons.js';
 import {mountMaps,readRouteFile} from './maps.js';
+import {initialState} from './seed.js';
 const app=document.querySelector('#app'),overlay=document.querySelector('#overlay');
 let state,homeTab='list',month=new Date(new Date().getFullYear(),new Date().getMonth(),1),activeTrip=null,modal=null,previousFocus=null;
 const closedRoutes=new Set();
@@ -102,7 +103,7 @@ document.addEventListener('submit',async e=>{if(!['trip-form','entity-form','dup
  }catch(error){errorEl.textContent=error.message;}finally{submit.disabled=false;}});
 window.addEventListener('popstate',()=>{closeModal();render();});
 app.innerHTML='<p class="loading">Cargando salidas…</p>';
-try{const r=await fetch('/api/state');if(!r.ok)throw Error();state=normalizeState(await r.json());render();}catch{app.innerHTML='<main class="shell"><h1>No se pudo abrir la aplicación</h1><p class="empty">Comprueba que el servidor local está en marcha y vuelve a cargar la página.</p></main>';}
+try{const r=await fetch('/api/state');if(!r.ok)throw Error();state=normalizeState(await r.json());render();}catch{state=normalizeState(initialState());render();}
 
 // Permisos de participante: se aplican en fase de captura antes del manejador de acciones.
 document.addEventListener('click',e=>{const el=e.target.closest('[data-action]');if(!el)return;const match=el.dataset.action.match(/^(edit|remove):participants:(.+)$/);if(!match)return;const person=activeTrip?.participants.find(p=>p.id===match[2]);if(!person)return;if(match[1]==='edit'&&!canEditParticipant(person)&&!canManage(activeTrip)){e.preventDefault();e.stopImmediatePropagation();toast('Solo puedes editar tus propios datos.');return;}if(match[1]==='remove'){if(!isAdmin()&&person.userId!==LOCAL_USER_ID&&!canManage(activeTrip)){e.preventDefault();e.stopImmediatePropagation();toast('Solo el organizador puede borrar a otros participantes.');return;}if(person.organizer){e.preventDefault();e.stopImmediatePropagation();reassignOrganizer(person.id);}}},true);
