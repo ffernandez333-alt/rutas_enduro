@@ -158,6 +158,22 @@ export async function readRouteFile(file) {
 
 const cache = new Map();
 
+function waypointIcon(name) {
+  const value = String(name || '').toLowerCase();
+  const glyph = /gas|fuel|repost|gasolin/.test(value) ? '⛽'
+    : /comida|rest|bar|food|almuerzo|cena/.test(value) ? '🍴'
+      : /aloj|hotel|casa|camp/.test(value) ? '🛏️'
+        : /inicio|start|salida/.test(value) ? '▶'
+          : /fin|meta|finish/.test(value) ? '🏁' : '◆';
+  return L.divIcon({
+    className: 'waypoint-icon',
+    html: `<span aria-hidden="true">${glyph}</span>`,
+    iconSize: [28, 28],
+    iconAnchor: [14, 14],
+    tooltipAnchor: [0, -14]
+  });
+}
+
 export async function mountMaps(routes) {
   for (const el of document.querySelectorAll('.map')) {
     const route = routes.find(r => r.id === el.dataset.routeId);
@@ -178,7 +194,7 @@ export async function mountMaps(routes) {
         { attribution: '© OpenStreetMap', maxZoom: 19 }).addTo(map);
       if (points?.length) {
         if (points.waypointsOnly || route.waypointsOnly) {
-          points.forEach(p => { const marker = L.marker([p.lat, p.lon]).addTo(map); if (p.name) marker.bindTooltip(p.name); });
+          points.forEach(p => { const marker = L.marker([p.lat, p.lon], { icon: waypointIcon(p.name) }).addTo(map); if (p.name) marker.bindTooltip(p.name); });
           map.fitBounds(L.latLngBounds(points.map(p => [p.lat, p.lon])), { padding: [20, 20] });
         } else {
           const line = L.polyline(points.map(p => [p.lat, p.lon]), { color: '#f96915', weight: 3 }).addTo(map);
