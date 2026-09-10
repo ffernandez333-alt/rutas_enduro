@@ -1,8 +1,9 @@
 export async function onRequest(context) {
   if (context.request.method === 'GET') {
     const assetUrl = new URL('/data/state.json', context.request.url);
-    const response = await fetch(assetUrl, { cf: { cacheTtl: 0, cacheEverything: false } });
-    if (!response.ok) {
+    const response = await context.env.ASSETS.fetch(new Request(assetUrl));
+    const contentType = response.headers.get('content-type') || '';
+    if (!response.ok || !contentType.includes('json')) {
       return Response.json({ error: 'Estado no disponible' }, { status: 500 });
     }
     return new Response(response.body, {
