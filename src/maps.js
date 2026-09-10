@@ -2,6 +2,20 @@ function elements(doc, name) {
   return [...doc.getElementsByTagNameNS('*', name)];
 }
 
+function textOf(element, name) {
+  return elements(element, name)[0]?.textContent.trim() || '';
+}
+
+function namedAncestor(element) {
+  let current = element;
+  while (current) {
+    const name = textOf(current, 'name');
+    if (name) return name;
+    current = current.parentNode;
+  }
+  return '';
+}
+
 function coordsFromElement(element) {
   return element.textContent.trim().split(/\s+/).map(value => {
     const [lon, lat, ele = 0] = value.split(',').map(Number);
@@ -22,13 +36,15 @@ export function parsePoints(xml) {
     points = trackPoints.map(e => ({
       lat: Number(e.getAttribute('lat')),
       lon: Number(e.getAttribute('lon')),
-      ele: Number(elements(e, 'ele')[0]?.textContent || 0)
+      ele: Number(elements(e, 'ele')[0]?.textContent || 0),
+      name: textOf(e, 'name')
     }));
   } else if (waypointPoints.length) {
     points = waypointPoints.map(e => ({
       lat: Number(e.getAttribute('lat')),
       lon: Number(e.getAttribute('lon')),
-      ele: Number(elements(e, 'ele')[0]?.textContent || 0)
+      ele: Number(elements(e, 'ele')[0]?.textContent || 0),
+      name: textOf(e, 'name')
     }));
     waypointsOnly = true;
   } else {
@@ -37,7 +53,8 @@ export function parsePoints(xml) {
     if (lineStrings.length) {
       points = lineStrings.flatMap(line => elements(line, 'coordinates').flatMap(coordsFromElement));
     } else if (pointElements.length) {
-      points = pointElements.flatMap(point => elements(point, 'coordinates').flatMap(coordsFromElement));
+      points = pointElements.flatMap(point => elements(point, 'coordinates').flatMap(coords =>
+        coordsFromElement(coords).map(p => ({ ...p, name: namedAncestor(point) }))));
       waypointsOnly = true;
     } else {
       points = elements(doc, 'coordinates').flatMap(coordsFromElement);
@@ -74,7 +91,7 @@ function xmlEscape(value) {
 
 export function pointsToGpx(points) {
   const body = points.waypointsOnly
-    ? points.map(p => `    <wpt lat="${p.lat}" lon="${p.lon}"><ele>${p.ele || 0}</ele></wpt>`).join('\n')
+    ? points.map(p => `    <wpt lat="${p.lat}" lon="${p.lon}">${p.name ? `<name>${xmlEscape(p.name)}</name>` : ''}<ele>${p.ele || 0}</ele></wpt>`).join('\n')
     : `    <trk><name>Ruta convertida</name><trkseg>\n${points.map(p =>
         `      <trkpt lat="${p.lat}" lon="${p.lon}"><ele>${p.ele || 0}</ele></trkpt>`).join('\n')}\n    </trkseg></trk>`;
   return `<?xml version="1.0" encoding="UTF-8"?>\n<gpx version="1.1" creator="Rutas Enduro" xmlns="http://www.topografix.com/GPX/1/1">\n${body}\n</gpx>\n`;
@@ -161,7 +178,7 @@ export async function mountMaps(routes) {
         { attribution: '© OpenStreetMap', maxZoom: 19 }).addTo(map);
       if (points?.length) {
         if (points.waypointsOnly || route.waypointsOnly) {
-          points.forEach(p => L.marker([p.lat, p.lon]).addTo(map));
+          points.forEach(p => { const marker = L.marker([p.lat, p.lon]).addTo(map); if (p.name) marker.bindTooltip(p.name); });
           map.fitBounds(L.latLngBounds(points.map(p => [p.lat, p.lon])), { padding: [20, 20] });
         } else {
           const line = L.polyline(points.map(p => [p.lat, p.lon]), { color: '#f96915', weight: 3 }).addTo(map);
