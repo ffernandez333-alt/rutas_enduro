@@ -116,8 +116,28 @@ document.addEventListener('submit',async e=>{if(!['trip-form','entity-form','dup
  if(form.id==='duplicate-form'){const t=structuredClone(state.trips.find(t=>t.id===modal.tripId));const oldStart=date(t.start),newStart=date(values.start);t.id=crypto.randomUUID();t.name=values.name;t.start=values.start;t.status='Propuesta';if(t.end){const end=date(t.end);end.setDate(end.getDate()+Math.round((newStart-oldStart)/86400000));t.end=end.toISOString().slice(0,10);}for(const key of ['participants','lodgings','expenses','routes'])t[key]=t[key].map(v=>({...v,id:crypto.randomUUID()}));const next=structuredClone(state);next.trips.unshift(t);await save(next);go(tripPath(t.id));toast('Salida duplicada');}
  }catch(error){errorEl.textContent=error.message;}finally{submit.disabled=false;}});
 window.addEventListener('popstate',()=>{closeModal();render();});
+async function migrateLegacyRouteFiles() {
+  const next = structuredClone(state);
+  let changed = false;
+  for (const trip of next.trips || []) for (const route of trip.routes || []) {
+    if (!route.file || !/\.(?:kml|kmz)(?:\.gpx)?$/i.test(route.filename || '')) continue;
+    if (/\.(?:kml|kmz)\.gpx$/i.test(route.filename || '') && /^data:application\/gpx/i.test(route.file)) { route.filename = route.filename.replace(/\.(?:kml|kmz)\.gpx$/i, '.gpx'); changed = true; continue; }
+    try {
+      const response = await fetch(route.file);
+      if (!response.ok) continue;
+      const blob = await response.blob();
+      const converted = await readRouteFile(new File([blob], route.filename, { type: blob.type }));
+      Object.assign(route, converted);
+      changed = true;
+    } catch { }
+  }
+  if (changed) {
+    state = next;
+    try { await save(next); } catch { }
+  }
+}
 app.innerHTML='<p class="loading">Cargando salidas…</p>';
-try{const r=await fetch('/api/state');if(!r.ok)throw Error();state=normalizeState(await r.json());applyDemo();render();}catch{state=normalizeState(initialState());applyDemo();render();}
+try{const r=await fetch('/api/state');if(!r.ok)throw Error();state=normalizeState(await r.json());applyDemo();await migrateLegacyRouteFiles();render();}catch{state=normalizeState(initialState());applyDemo();render();}
 
 // Permisos de participante: se aplican en fase de captura antes del manejador de acciones.
 document.addEventListener('click',e=>{const el=e.target.closest('[data-action]');if(!el)return;const match=el.dataset.action.match(/^(edit|remove):participants:(.+)$/);if(!match)return;const person=activeTrip?.participants.find(p=>p.id===match[2]);if(!person)return;if(match[1]==='edit'&&!canEditParticipant(person)&&!canManage(activeTrip)){e.preventDefault();e.stopImmediatePropagation();toast('Solo puedes editar tus propios datos.');return;}if(match[1]==='remove'){if(!isAdmin()&&person.userId!==LOCAL_USER_ID&&!canManage(activeTrip)){e.preventDefault();e.stopImmediatePropagation();toast('Solo el organizador puede borrar a otros participantes.');return;}if(person.organizer){e.preventDefault();e.stopImmediatePropagation();reassignOrganizer(person.id);}}},true);
@@ -127,3 +147,6 @@ async function reorderRoute(source,target){if(!source||source===target||!activeT
 document.addEventListener('dragstart',e=>{draggedRoute=e.target.closest('[data-route-order]')?.dataset.routeOrder;if(draggedRoute)e.dataTransfer.setData('text/plain',draggedRoute);});document.addEventListener('dragover',e=>{if(draggedRoute&&e.target.closest('[data-route-order]'))e.preventDefault();});document.addEventListener('drop',async e=>{const target=e.target.closest('[data-route-order]')?.dataset.routeOrder;if(target&&draggedRoute){e.preventDefault();try{await reorderRoute(draggedRoute,target);}catch(error){toast(error.message);}draggedRoute=null;}});document.addEventListener('keydown',async e=>{const source=e.target.dataset.orderId;if(source&&['ArrowUp','ArrowDown'].includes(e.key)){e.preventDefault();const at=activeTrip.routes.findIndex(r=>r.id===source),target=activeTrip.routes[at+(e.key==='ArrowUp'?-1:1)];if(target){await reorderRoute(source,target.id);document.querySelector('[data-order-id="'+source+'"]')?.focus();}}});
 
 document.addEventListener('click',e=>{const link=e.target.closest('a[data-download]');if(!link)return;e.preventDefault();const bar=link.parentElement.querySelector('.download-progress');if(!bar)return;const fill=bar.querySelector('span');let progress=0;const timer=setInterval(()=>{progress=Math.min(100,progress+10);fill.style.width=progress+'%';if(progress===100){clearInterval(timer);bar.classList.add('done');const href=link.href;link.removeAttribute('data-download');link.click();}},70);});
+
+
+

@@ -129,7 +129,7 @@ export async function readRouteFile(file) {
         r.onerror = () => reject(Error('No se pudo leer el archivo'));
         r.readAsDataURL(file);
       });
-  const base = file.name.replace(/\\.(?:kml|kmz|gpx)$/i, '');
+  const base = file.name.replace(/\.(?:kml|kmz|gpx)$/i, '');
   return {
     file: data,
     filename: converted ? `${base}.gpx` : file.name,
@@ -174,6 +174,7 @@ export async function mountMaps(routes) {
     }
   }
 }
+
 
 
 
